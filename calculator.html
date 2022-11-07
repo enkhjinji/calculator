@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .container{
+            width: 300px;
+            height: 200px;
+            background-color: lightsalmon;
+            display: grid;
+            grid-template-columns: repeat(4,20%);
+            grid-template-rows: repeat(4, 20%);
+            cursor: pointer;
+        }
+        .container div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .calc{
+            grid-column: 1/6;
+        }
+
+    </style>
+
+    <div class="container">
+        <input class="calc" type="text">
+        <div class="number">1</div>
+        <div class="number">2</div>
+        <div class="number">3</div>
+        <div class="number">4</div>
+        <div class="number">5</div>
+        <div class="number">6</div>
+        <div class="number">7</div>
+        <div class="number">8</div>
+        <div class="number">9</div>
+        <div class="number">0</div>
+        <div class="operator">-</div>
+        <div class="operator">+</div>
+        <div class="operator">*</div>
+        <div class="operator">/</div>
+        <div class="equal">=</div>
+        <div class="clearone">X</div>
+        <div class="clear">clr</div>
+
+    </div>
+    <script>
+        const input = document.querySelector('.calc')
+        const numbers = document.querySelectorAll('.number')
+        const operators = document.querySelectorAll('.operator')
+        const equal = document.querySelector('.equal')
+        const clearones = document.querySelector('.clearone')
+        const clears = document.querySelector('.clear')
+        let check = true
+        let i = ""
+        numbers.forEach((el)=>{
+            el.addEventListener('click',()=>{
+                input.value+=el.innerText
+                check = true
+            })
+        })
+        operators.forEach((el)=>{
+            el.addEventListener('click',()=>{
+                if(input.value==""){
+                    return
+                }else if(check==true){
+                    input.value+=el.innerText
+                    check=false
+                } 
+            })
+        })
+        equal.addEventListener('click',()=>{
+            input.value=eval(input.value)
+
+        })
+        clears.addEventListener('click',()=>{
+            input.value= i
+        })
+        clearones.addEventListener('click',()=>{
+            let arr = input.value.split("")
+            arr.pop()
+            let x = arr.join("")
+            input.value=x
+        })
+    </script>
+</body>
+</html>
